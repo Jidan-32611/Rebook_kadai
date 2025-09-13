@@ -7,7 +7,7 @@ VALUES
 
 -- category
 INSERT INTO category (name) VALUES
-  ('本'), ('家電'), ('ファッション'), ('おもちゃ');
+  ('本'), ('家電'), ('ファッション'), ('おもちゃ'),('文房具');
 
 -- item
 INSERT INTO item (user_id, name, description, price, category_id, status)
