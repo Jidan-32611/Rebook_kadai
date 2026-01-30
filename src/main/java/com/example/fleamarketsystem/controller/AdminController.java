@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.fleamarketsystem.service.AppOrderService;
 import com.example.fleamarketsystem.service.ItemService;
+import com.example.fleamarketsystem.service.ReportService;
 
 @Controller
 @RequestMapping("/admin")
@@ -26,10 +27,12 @@ public class AdminController {
 
 	private final ItemService itemService;
 	private final AppOrderService appOrderService;
+	private final ReportService reportService;
 
-	public AdminController(ItemService itemService, AppOrderService appOrderService) {
+	public AdminController(ItemService itemService, AppOrderService appOrderService, ReportService reportService) {
 		this.itemService = itemService;
 		this.appOrderService = appOrderService;
+		this.reportService = reportService;
 	}
 
 	@GetMapping("/items")
@@ -46,10 +49,8 @@ public class AdminController {
 
 	@GetMapping("/statistics")
 	public String showStatistics(
-			@RequestParam(value = "startDate", required = false)
-			@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
-			@RequestParam(value = "endDate", required = false)
-			@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate,
+			@RequestParam(value = "startDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+			@RequestParam(value = "endDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate,
 			Model model) {
 
 		if (startDate == null)
@@ -66,10 +67,8 @@ public class AdminController {
 
 	@GetMapping("/statistics/csv")
 	public void exportStatisticsCsv(
-			@RequestParam(value = "startDate", required = false)
-			@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
-			@RequestParam(value = "endDate", required = false)
-			@DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate,
+			@RequestParam(value = "startDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+			@RequestParam(value = "endDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate,
 			HttpServletResponse response) throws IOException {
 
 		if (startDate == null)
@@ -90,5 +89,11 @@ public class AdminController {
 					.forEach((status, count) -> writer.append(status).append(",").append(String.valueOf(count))
 							.append("\n"));
 		}
+	}
+
+	@GetMapping("/reports")
+	public String showReports(Model model) {
+		model.addAttribute("reports", reportService.getAllReports());
+		return "admin_reports";
 	}
 }

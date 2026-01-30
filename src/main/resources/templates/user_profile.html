@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${user.name} + ' のプロフィール'">ユーザープロフィール</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <style>
+       
+    </style>
+</head>
+<body>
+
+<!-- プロフィール -->
+<div class="profile-box">
+    <h1 th:text="${user.name}">ユーザー名</h1>
+
+</div>
+
+<!-- 出品商品一覧 -->
+<h2>出品商品一覧</h2>
+
+<div class="item-grid">
+    <div class="item-card" th:each="item : ${items}">
+        <a th:href="@{/items/{id}(id=${item.id})}">
+            <img th:if="${item.imageUrl != null}"
+                 th:src="${item.imageUrl}"
+                 alt="商品画像">
+            <p th:text="${item.name}">商品名</p>
+			<p>¥<span th:text="${#numbers.formatDecimal(item.price, 0, 'NONE', 0, 'POINT')}">0</span></p>
+			<p th:if="${item.status == '売却済'}" class="sold-label">売却済</p>
+
+
+        </a>
+    </div>
+
+    <!-- 商品がない場合 -->
+    <p th:if="${#lists.isEmpty(items)}">
+        出品中の商品はありません。
+    </p>
+</div>
+
+</body>
+</html>

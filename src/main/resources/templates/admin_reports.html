@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>通報一覧 | 管理者</title>
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
+    <style>
+		
+		body{
+			padding: 3%;
+		}
+			
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        .status-new {
+            color: #d9534f;
+            font-weight: bold;
+        }
+        .status-done {
+            color: #5cb85c;
+            font-weight: bold;
+        }
+        .btn {
+            padding: 4px 8px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+        .btn-detail {
+            background-color: #0275d8;
+            color: white;
+        }
+		h1{
+			color: red;
+		}
+    </style>
+</head>
+<body>
+
+<h1>商品通報一覧</h1>
+
+<a th:href="@{/admin/users}" th:if="${#authorization.expression('hasRole(''ADMIN'')')}">ユーザー管理に戻る</a>
+<p>未対応の通報を優先的に確認してください。</p>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>商品名</th>
+        <th>理由</th>
+        <th>通報者</th>
+        <th>通報日時</th>
+        <th>状態</th>
+        <th>確認</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="report : ${reports}">
+        <td th:text="${report.id}"></td>
+
+        <td>
+            <a th:href="@{/items/{id}(id=${report.item.id})}"
+               th:text="${report.item.name}">
+            </a>
+        </td>
+
+        <td th:text="${report.reason}"></td>
+
+        <td th:text="${report.reporter.name}"></td>
+
+        <td th:text="${#temporals.format(report.createdAt, 'yyyy/MM/dd HH:mm')}"></td>
+
+        <td>
+			<form th:if="${report.status == '未対応'}"
+			            th:action="@{/admin/reports/{id}/resolve(id=${report.id})}"
+			            method="post">
+			        <button type="submit">対応済にする</button>
+			      </form>
+
+			      <span th:if="${report.status == '対応済'}"> 対応済</span>
+        </td>
+
+        <td>
+            <a th:href="@{/admin/users/{id}(id=${report.item.seller.id})}"
+               class="btn btn-detail">
+                詳細
+            </a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

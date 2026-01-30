@@ -1,68 +1,140 @@
+/* ===============================
+   CSS Variables
+================================ */
 :root {
-  --bg: #f8fafc;
-  --card: #ffffff;
+  --primary: #e97700;
+  --primary-hover: #d16900;
+  --primary-light: #fff4e6;
+
+  --text-main: #111827;
+  --text-sub: #6b7280;
+
   --border: #e5e7eb;
-  --text: #111827;
-  --muted: #6b7280;
-  --primary: #2563eb;
-  --danger: #dc2626;
+  --bg: #fffaf0;
+
+  --card: #ffffff;
+  --shadow: 0 10px 30px rgba(0,0,0,0.08);
+  --shadow-soft: 0 2px 10px rgba(0,0,0,0.06);
 }
 
+/* ===============================
+   Base
+================================ */
 * { box-sizing: border-box; }
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin: 0;
-    padding: 20px;
-    background-color: #eef2f7;
-    color: #333;
-    line-height: 1.6;
-}
-/* ナビ */
-.navbar {
-  display: flex; align-items: center; justify-content: space-between;
-  gap: 1rem; padding: 0.75rem 1rem; background: var(--card); border-bottom: 1px solid var(--border);
-}
-.brand { font-weight: 700; text-decoration: none; color: var(--text); }
-.nav-links a {
-  margin-right: .75rem; text-decoration: none; color: var(--text);
-}
-.nav-links a:hover { text-decoration: underline; }
-.logout-form { margin: 0; }
 
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
+  color: var(--text-main);
+}
+
+a { color: inherit; text-decoration: none; }
 
 .container {
-    max-width: 960px;
-    margin: 30px auto;
-    background-color: #ffffff;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 16px;
 }
 
-h1,
+/* ===============================
+   Header / Navbar (fragment想定)
+================================ */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 16px;
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+}
+
+.brand {
+  font-size: 1.25rem;
+  font-weight: 900;
+  letter-spacing: .2px;
+}
+
+.nav-links a {
+  margin-right: 12px;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.nav-links a:hover { text-decoration: underline; }
+
+.logout-form { margin: 0; }
+
+/* ===============================
+   Headings
+================================ */
+h1 {
+  font-size: 1.4rem;
+  font-weight: 900;
+  margin: 24px 0 12px;
+}
+
 h2 {
-    color: #2c3e50;
-    text-align: center;
-    margin-bottom: 30px;
-    font-size: 2.2em;
+  font-size: 1.05rem;
+  font-weight: 900;
+  margin: 34px 0 12px;
 }
 
-h2 {
-    font-size: 1.8em;
-    margin-top: 40px;
-    border-bottom: 2px solid #e0e0e0;
-    padding-bottom: 10px;
+p { margin: 0 0 12px; line-height: 1.7; }
+
+/* ===============================
+   Buttons (共通)
+================================ */
+.button,
+button {
+  border: none;
+  cursor: pointer;
+  border-radius: 999px;
+  padding: 10px 18px;
+  font-size: 0.9rem;
+  font-weight: 800;
+  background: #374151;
+  color: #fff;
+  transition: background .2s ease, transform .12s ease;
 }
 
-p {
-    margin-bottom: 15px;
+.button:hover,
+button:hover {
+  background: #111;
+  transform: translateY(-1px);
 }
 
+.button.secondary {
+  background: #fff;
+  color: #111;
+  border: 1px solid var(--border);
+}
+
+.button.secondary:hover {
+  background: #f3f4f6;
+  transform: translateY(-1px);
+}
+
+.button.danger {
+  background: var(--primary);
+}
+
+.button.danger:hover {
+  background: var(--primary-hover);
+}
+
+/* ===============================
+   Forms (基本入力)
+================================ */
 label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: bold;
-    color: #555;
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 800;
+  color: #374151;
+  font-size: 0.85rem;
 }
 
 input[type="text"],
@@ -71,349 +143,428 @@ input[type="email"],
 input[type="number"],
 textarea,
 select {
-    width: calc(100% - 24px); /* Adjust for padding and border */
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 1em;
-    box-sizing: border-box;
-    transition: border-color 0.3s ease;
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  background: #fff;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-input[type="text"]:focus,
-input[type="password"]:focus,
-input[type="email"]:focus,
-input[type="number"]:focus,
+input:focus,
 textarea:focus,
 select:focus {
-    border-color: #007bff;
-    outline: none;
+  outline: none;
+  border-color: rgba(233,119,0,0.7);
+  box-shadow: 0 0 0 4px rgba(233,119,0,0.12);
 }
 
-textarea {
-    resize: vertical;
-    min-height: 100px;
-}
+textarea { resize: vertical; min-height: 90px; }
 
-.button-group {
-    text-align: center;
-    margin-top: 30px;
-}
-
-button,
-.button {
-    background-color: #007bff;
-    color: white;
-    padding: 12px 25px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 1.1em;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    display: inline-block;
-    margin: 0 10px;
-}
-
-button:hover,
-.button:hover {
-    background-color: #0056b3;
-    transform: translateY(-2px);
-}
-
-.button.secondary {
-    background-color: #6c757d;
-}
-
-.button.secondary:hover {
-    background-color: #5a6268;
-}
-
-.button.danger {
-    background-color: #dc3545;
-}
-
-.button.danger:hover {
-    background-color: #c82333;
-}
-
+/* ===============================
+   Messages
+================================ */
 .error-message {
-    color: #dc3545;
-    font-size: 0.9em;
-    margin-top: 5px;
-    display: block;
-    text-align: center;
+  margin: 14px 0;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: #fee2e2;
+  color: #991b1b;
+  font-weight: 800;
+  border: 1px solid #fecaca;
 }
 
 .success-message {
-    color: #28a745;
-    font-size: 1.1em;
-    text-align: center;
-    margin-top: 20px;
-    padding: 15px;
-    background-color: #d4edda;
-    border: 1px solid #c3e6cb;
-    border-radius: 5px;
+  margin: 14px 0;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: #dcfce7;
+  color: #166534;
+  font-weight: 800;
+  border: 1px solid #bbf7d0;
 }
 
-/* Tables */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    background-color: #fff;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    border-radius: 8px;
-    overflow: hidden;
-}
-
-th,
-td {
-    border: 1px solid #e0e0e0;
-    padding: 12px 15px;
-    text-align: left;
-}
-
-th {
-    background-color: #f2f2f2;
-    font-weight: bold;
-    color: #444;
-}
-
-tr:nth-child(even) {
-    background-color: #f9f9f9;
-}
-
-tr:hover {
-    background-color: #f1f1f1;
-}
-
-/* Navigation */
+/* ===============================
+   商品一覧 (items.html)
+================================ */
 .main-nav {
-    text-align: center;
-    margin-bottom: 30px;
+  display: flex;
+  gap: 12px;
+  margin: 14px 0 18px;
 }
 
-.main-nav a {
-    background-color: #34495e;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
-    text-decoration: none;
-    margin: 0 5px;
-    transition: background-color 0.3s ease;
+.filter-form {
+  display: grid;
+  grid-template-columns: 1fr 220px auto;
+  gap: 12px;
+  align-items: end;
+  background: #f9fafb;
+  padding: 16px;
+  border-radius: 16px;
+  border: 1px solid #eee;
+  box-shadow: var(--shadow-soft);
 }
 
-.main-nav a:hover {
-    background-color: #2c3e50;
+.filter-form label {
+  font-size: 0.8rem;
+  color: var(--text-sub);
+  font-weight: 800;
 }
 
-/* Item Grid */
 .item-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px;
-    margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
+  gap: 14px;
+  margin-top: 22px;
 }
 
+/* item-card（一覧用） */
 .item-card {
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    overflow: hidden;
-    text-align: center;
-    transition: transform 0.2s ease;
+  background: var(--card);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+  transition: transform .15s ease, box-shadow .15s ease;
+  position: relative;
 }
 
 .item-card:hover {
-    transform: translateY(-5px);
+  transform: translateY(-3px);
+  box-shadow: 0 14px 28px rgba(0,0,0,0.10);
 }
 
-.item-card a {
-    text-decoration: none;
-    color: inherit;
-    display: block;
-    padding: 15px;
-}
+.item-card a { display: block; }
 
 .item-card img {
-    width: 100%;
-    height: 150px; /* Fixed height for images */
-    object-fit: cover; /* Cover the area, cropping if necessary */
-    border-bottom: 1px solid #eee;
-    margin-bottom: 10px;
+  width: 100%;
+  height: 170px;
+  object-fit: cover;
+  background: #eee;
 }
 
 .item-card h3 {
-    font-size: 1.1em;
-    margin-bottom: 5px;
-    color: #2c3e50;
+  font-size: 13px;
+  font-weight: 800;
+  padding: 10px 10px 0;
+  margin: 0;
+  line-height: 1.35;
+  height: 36px;
+  overflow: hidden;
 }
 
 .item-card .price {
-    font-size: 1.2em;
-    font-weight: bold;
-    color: #007bff;
-    margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: 900;
+  padding: 6px 10px 6px;
+  margin: 0;
+  color: #111;
 }
 
 .item-card .status {
-    font-size: 0.9em;
-    color: #6c757d;
+  font-size: 11px;
+  color: var(--text-sub);
+  padding: 0 10px 12px;
+  margin: 0;
+}
+
+/* 売却済：右下バッジ（item-card に sold クラスを付けた場合） */
+.item-card.sold img { filter: brightness(70%); }
+
+.item-card.sold::after {
+  content: "売却済";
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background: rgba(0,0,0,0.72);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 900;
+  padding: 5px 10px;
+  border-radius: 10px;
+  letter-spacing: 1px;
+}
+
+/* 商品なし */
+.item-grid > div > p,
+.item-grid > p {
+  color: var(--text-sub);
 }
 
 /* Pagination */
 .pagination {
-    text-align: center;
-    margin-top: 30px;
+  margin: 32px 0 16px;
+  text-align: center;
 }
 
 .pagination a,
-.pagination span.current-page {
-    display: inline-block;
-    padding: 8px 15px;
-    margin: 0 5px;
-    border: 1px solid #007bff;
-    border-radius: 5px;
-    text-decoration: none;
-    color: #007bff;
-    transition: background-color 0.3s ease, color 0.3s ease;
+.pagination .current-page {
+  display: inline-block;
+  min-width: 38px;
+  padding: 8px 12px;
+  margin: 0 4px;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 900;
+}
+
+.pagination a {
+  border: 1px solid #ddd;
+  background: #fff;
+  color: #333;
 }
 
 .pagination a:hover {
-    background-color: #007bff;
-    color: white;
+  background: #111;
+  color: #fff;
 }
 
-.pagination span.current-page {
-    background-color: #007bff;
-    color: white;
-    font-weight: bold;
+.pagination .current-page {
+  background: var(--primary);
+  color: #fff;
 }
 
-/* Item Detail */
+/* ===============================
+   商品詳細 (item detail)
+================================ */
 .item-detail {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 30px;
+  margin: 18px 0 34px;
+  padding: 18px;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: var(--shadow);
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  column-gap: 36px;
+  row-gap: 12px;
+  align-items: start;
 }
 
-.item-detail .item-image {
-    max-width: 100%;
-    height: auto;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
+/* 画像（左） */
+.item-detail > img {
+  grid-column: 1;
+  grid-row: 1 / span 20; /* 右側が長くなっても画像を左に固定 */
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border-radius: 18px;
+  background: #f3f4f6;
 }
 
-.item-detail p {
-    font-size: 1.1em;
-    margin-bottom: 10px;
+/* 右側の情報は全部2列目へ */
+.item-detail > :not(img) {
+  grid-column: 2;
 }
 
+/* 価格（右側で目立たせる） */
 .item-detail .price {
-    font-size: 1.5em;
-    font-weight: bold;
-    color: #007bff;
+  margin-top: 6px;
+  font-size: 1.05rem;
+  color: var(--text-sub);
 }
 
-/* Chat */
+.item-detail .price span {
+  display: inline-block;
+  margin-left: 8px;
+  font-size: 2.2rem;
+  font-weight: 1000;
+  color: var(--primary);
+  letter-spacing: .5px;
+}
+
+/* 「説明/カテゴリ/出品者/ステータス」のラベル感 */
+.item-detail p {
+  color: #374151;
+}
+
+.item-detail p span,
+.item-detail p a {
+  font-weight: 700;
+  color: #111827;
+}
+
+/* ボタン群（購入/お気に入り） */
+.button-group {
+  grid-column: 2;
+  margin-top: 14px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+/* 購入ボタンは横長に（EC風） */
+.button-group form:first-child button.button {
+  background: var(--primary);
+  padding: 14px 18px;
+  border-radius: 14px;
+  font-size: 1rem;
+  font-weight: 1000;
+  width: min(520px, 100%);
+}
+
+.button-group form:first-child button.button:hover {
+  background: var(--primary-hover);
+  transform: none;
+}
+
+/* お気に入りボタンはサブ扱い */
+.button-group form button.button {
+  border-radius: 14px;
+  transform: none;
+}
+
+/* 戻るボタンの位置 */
+.button-group .button.secondary {
+  margin-top: 10px;
+}
+
+/* ===============================
+   Chat (あなたのHTML: chat-box / chat-form)
+================================ */
 .chat-box {
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    padding: 15px;
-    max-height: 300px;
-    overflow-y: auto;
-    margin-bottom: 20px;
-    background-color: #f9f9f9;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 14px;
+  max-height: 320px;
+  overflow-y: auto;
+  background: #fff;
+  box-shadow: var(--shadow-soft);
 }
 
 .chat-message {
-    margin-bottom: 10px;
-    padding: 8px 12px;
-    border-radius: 15px;
-    max-width: 80%;
-    word-wrap: break-word;
+  margin-bottom: 10px;
+  padding: 10px 12px;
+  border-radius: 16px;
+  max-width: 78%;
+  word-wrap: break-word;
+  background: #f3f4f6;
 }
 
 .my-message {
-    background-color: #dcf8c6; /* Light green for sender */
-    margin-left: auto;
-    text-align: right;
+  background: #dcfce7;
+  margin-left: auto;
+  text-align: right;
 }
 
 .other-message {
-    background-color: #e0e0e0; /* Light gray for receiver */
-    margin-right: auto;
-    text-align: left;
+  background: #e0f2fe;
+  margin-right: auto;
+  text-align: left;
 }
 
 .sender-name {
-    font-weight: bold;
-    font-size: 0.9em;
-    color: #555;
+  font-weight: 900;
+  font-size: 0.85rem;
+  color: #374151;
 }
 
 .message-time {
-    font-size: 0.8em;
-    color: #888;
-    margin-left: 10px;
+  font-size: 0.75rem;
+  color: #6b7280;
+  margin-left: 8px;
 }
 
-.chat-message p {
-    margin: 5px 0 0 0;
-}
+.chat-message p { margin: 6px 0 0; }
 
 .chat-form {
-    display: flex;
-    gap: 10px;
+  margin-top: 12px;
+  display: flex;
+  gap: 10px;
+  align-items: flex-end;
 }
 
 .chat-form textarea {
-    flex-grow: 1;
-    min-height: 40px;
-    padding: 10px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
+  flex: 1;
+  min-height: 44px;
+  border-radius: 14px;
 }
 
 .chat-form button {
-    flex-shrink: 0;
-    padding: 10px 20px;
+  padding: 12px 18px;
+  border-radius: 999px;
+  background: #111;
 }
 
-/* Filter Form */
-.filter-form {
-    display: flex;
-    gap: 15px;
-    margin-bottom: 20px;
-    align-items: flex-end;
+/* ===============================
+   Report box (あなたのHTMLは report-box)
+================================ */
+.report-box {
+  margin-top: 22px;
+  background: #fff;
+  padding: 18px;
+  border-radius: 18px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-soft);
+}
+
+.report-box h3 {
+  margin: 0 0 12px;
+  font-size: 1rem;
+  font-weight: 1000;
+}
+
+.report-box form textarea {
+  min-height: 90px;
+  margin-top: 8px;
+}
+
+/* ===============================
+   Profile
+================================ */
+.profile-box {
+  background: var(--card);
+  padding: 18px;
+  border-radius: 18px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-soft);
+  margin: 18px 0;
+}
+
+.profile-box h1 {
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+/* ===============================
+   Responsive
+================================ */
+@media (max-width: 900px) {
+  .filter-form {
+    grid-template-columns: 1fr;
+  }
+
+  .main-nav {
     flex-wrap: wrap;
-    background-color: #f8f9fa;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-}
+  }
 
-.filter-form div {
-    flex: 1;
-    min-width: 180px;
-}
+  .item-detail {
+    grid-template-columns: 1fr;
+    row-gap: 14px;
+    padding: 14px;
+  }
 
-.filter-form label {
-    font-size: 0.9em;
-    color: #666;
-}
+  .item-detail > img {
+    grid-column: 1;
+    grid-row: auto;
+    aspect-ratio: 4 / 5;
+  }
 
-.filter-form input[type="text"],
-.filter-form select {
+  .item-detail > :not(img),
+  .button-group {
+    grid-column: 1;
+  }
+
+  .button-group form:first-child button.button {
     width: 100%;
-    padding: 8px;
-    border-radius: 4px;
-    border: 1px solid #ddd;
-}
+  }
 
-.filter-form button {
-    padding: 10px 20px;
-    font-size: 1em;
+  .chat-form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .chat-form button {
+    width: 100%;
+  }
 }

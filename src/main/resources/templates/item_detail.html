@@ -13,13 +13,16 @@
         <div th:if="${successMessage}" class="success-message" th:text="${successMessage}"></div>
 
         <div class="item-detail">
-            <img th:src="${item.imageUrl != null ? item.imageUrl : '/images/placeholder.png'}" alt="商品画像" class="item-image">
+			<img th:src="@{${item.imageUrl != null ? item.imageUrl : '/images/placeholder.png'}}"alt="商品画像">
             <p class="price">価格: <span th:text="'¥' + ${#numbers.formatDecimal(item.price, 0, 'COMMA', 0, 'POINT')}"></span></p>
             <p>説明: <span th:text="${item.description}"></span></p>
             <p>カテゴリ: <span th:text="${item.category != null ? item.category.name : '未分類'}"></span></p>
-            <p>出品者: <span th:text="${item.seller.name}"></span>
-                <span th:if="${sellerAverageRating}">(平均評価: <span th:text="${sellerAverageRating}"></span>)</span>
-            </p>
+			<p>
+			    出品者：
+			    <a th:href="@{/users/{id}(id=${item.seller.id})}"
+			       th:text="${item.seller.name}">
+			    </a>
+			</p>
             <p>ステータス: <span th:text="${item.status}"></span></p>
 
             <div class="button-group">
@@ -27,7 +30,6 @@
                     <input type="hidden" name="itemId" th:value="${item.id}">
                     <button type="submit" class="button">購入する</button>
                 </form>
-                <a th:href="@{/chat/{itemId}(itemId=${item.id})}" class="button secondary">チャットで質問/交渉</a>
 
                 <div sec:authorize="isAuthenticated()" th:if="${item.seller.email != #authentication.name}">
                     <form th:if="${isFavorited}" th:action="@{/items/{id}/unfavorite(id=${item.id})}" method="post" style="display:inline;">
@@ -37,6 +39,7 @@
                         <button type="submit" class="button">お気に入りに追加</button>
                     </form>
                 </div>
+				
             </div>
         </div>
 
@@ -50,13 +53,37 @@
             <div th:if="${#lists.isEmpty(chats)}">
                 <p>まだチャットメッセージはありません。</p>
             </div>
+			
         </div>
 
         <form th:action="@{/chat/{itemId}(itemId=${item.id})}" method="post" class="chat-form">
             <textarea name="message" placeholder="メッセージを入力してください" required></textarea>
             <button type="submit">送信</button>
         </form>
+		
 
+		<div class="report-box">
+							  <h3>管理者へ通報</h3>
+
+							  <form th:action="@{/reports}" method="post">
+								<input type="hidden" th:name="${_csrf.parameterName}"　th:value="${_csrf.token}">
+								<input type="hidden" name="itemId" th:value="${item.id}">
+							    <label>
+							      通報理由：
+							      <select name="reason" required>
+							        <option value="">選択してください</option>
+							        <option value="盗品">盗品</option>
+							        <option value="違法">違法</option>
+							        <option value="その他">その他</option>
+							      </select>
+							    </label>
+
+							    <textarea name="message" placeholder="詳細（任意）"></textarea>
+
+							    <button type="submit">通報する</button>
+							  </form>
+							</div>
+		
         <div class="button-group">
             <a th:href="@{/items}" class="button secondary">商品一覧に戻る</a>
         </div>

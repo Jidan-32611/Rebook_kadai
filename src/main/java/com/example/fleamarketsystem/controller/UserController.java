@@ -46,8 +46,9 @@ public class UserController {
 	public String mySellingItems(@AuthenticationPrincipal UserDetails userDetails, Model model) {
 		User currentUser = userService.getUserByEmail(userDetails.getUsername())
 				.orElseThrow(() -> new RuntimeException("User not found"));
-
-		model.addAttribute("sellingItems", itemService.getItemsBySeller(currentUser));
+		// マイページは全商品
+		model.addAttribute("sellingItems",
+				itemService.getMyItemsBySeller(currentUser));
 		return "seller_items";
 	}
 
@@ -86,4 +87,5 @@ public class UserController {
 		model.addAttribute("reviews", reviewService.getReviewsByReviewer(currentUser));
 		return "user_reviews";
 	}
+
 }

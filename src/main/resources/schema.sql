@@ -7,6 +7,7 @@ DROP TABLE IF EXISTS item CASCADE;
 DROP TABLE IF EXISTS category CASCADE;
 DROP TABLE IF EXISTS user_complaint CASCADE;
 DROP TABLE IF EXISTS users CASCADE;
+DROP TABLE IF EXISTS report CASCADE;
 
 -- ========== CREATE ==========
 CREATE TABLE users (
@@ -101,6 +102,17 @@ CREATE TABLE user_complaint (
   FOREIGN KEY (reporter_user_id) REFERENCES users(id)
 );
 
+CREATE TABLE report (
+  id serial PRIMARY KEY,
+  item_id int NOT NULL REFERENCES item(id),
+  reporter_id int NOT NULL REFERENCES users(id),
+  reason varchar(50) NOT NULL,
+  message text,
+  status varchar(20) DEFAULT '未対応',
+  created_at timestamp DEFAULT CURRENT_TIMESTAMP
+);
+
+
 -- ========== INDEX ==========
 CREATE INDEX IF NOT EXISTS idx_users_banned           ON users(banned);
 CREATE INDEX IF NOT EXISTS idx_users_banned_by        ON users(banned_by_admin_id);
@@ -122,3 +134,10 @@ CREATE INDEX IF NOT EXISTS idx_review_order_id        ON review(order_id);
 
 CREATE INDEX IF NOT EXISTS idx_uc_reported            ON user_complaint(reported_user_id);
 CREATE INDEX IF NOT EXISTS idx_uc_reporter            ON user_complaint(reporter_user_id);
+
+--通報関係のINDEX--
+CREATE INDEX IF NOT EXISTS idx_report_item_id         ON report(item_id);
+CREATE INDEX IF NOT EXISTS idx_report_reporter_id     ON report(reporter_id);
+CREATE INDEX IF NOT EXISTS idx_report_status          ON report(status);
+CREATE INDEX IF NOT EXISTS idx_report_created_at      ON report(created_at);
+CREATE INDEX IF NOT EXISTS idx_report_status_created  ON report(status, created_at);

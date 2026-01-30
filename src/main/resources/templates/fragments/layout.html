@@ -9,10 +9,11 @@
 <body>
   <header th:fragment="header">
     <nav class="navbar">
-      <a class="brand" th:href="@{/items}">FleaMarket</a>
+      <a class="brand" th:href="@{/items}">📕 ReBook</a>
       <div class="nav-links">
         <a th:href="@{/items}">商品一覧</a>
         <a th:href="@{/admin/users}" th:if="${#authorization.expression('hasRole(''ADMIN'')')}">ユーザー管理</a>
+		<a th:href="@{/admin/reports}" th:if="${#authorization.expression('hasRole(''ADMIN'')')}">通報対応</a>
       </div>
 
       <!-- ログアウト：POST /logout（CSRF 必須） -->
