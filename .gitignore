@@ -1,0 +1,16 @@
+# ===== secrets =====
+.env
+application-local.properties
+
+# ===== build outputs =====
+target/
+build/
+out/
+*.class
+
+# ===== IDE =====
+.idea/
+.vscode/
+.project
+.classpath
+.settings/
