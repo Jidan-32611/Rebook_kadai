@@ -6,7 +6,7 @@
   --primary-hover:#d16900;
   --primary-light:#fff4e6;
 
-  --text-main:#111827;
+  --text-main:#374151; /* 黒より優しい濃グレー */
   --text-sub:#6b7280;
 
   --border:#e5e7eb;
@@ -39,7 +39,7 @@ a{ color:inherit; text-decoration:none; }
 }
 
 /* ===============================
-   Header / Navbar
+   Header / Navbar (fragment)
 ================================ */
 .navbar{
   display:flex;
@@ -60,7 +60,6 @@ a{ color:inherit; text-decoration:none; }
 .nav-links a{
   margin-right:12px;
   font-weight:700;
-  color:var(--text-main);
 }
 
 .nav-links a:hover{ text-decoration:underline; }
@@ -73,13 +72,15 @@ h1{
   font-size:1.4rem;
   font-weight:900;
   margin:24px 0 12px;
+  color:#374151;
 }
 h2{
   font-size:1.05rem;
   font-weight:900;
   margin:34px 0 12px;
+  color:#374151;
 }
-p{ margin:0 0 12px; line-height:1.7; }
+p{ margin:0 0 12px; line-height:1.7; color:var(--text-main); }
 
 /* ===============================
    Buttons
@@ -104,15 +105,23 @@ button:hover{
 
 .button.secondary{
   background:#fff;
-  color:#111;
+  color:#374151;
   border:1px solid var(--border);
 }
-.button.secondary:hover{ background:#f3f4f6; }
+.button.secondary:hover{
+  background:#f9fafb;
+  transform:translateY(-1px);
+}
 
 .button.danger{
   background:var(--primary);
 }
-.button.danger:hover{ background:var(--primary-hover); }
+.button.danger:hover{
+  background:var(--primary-hover);
+}
+
+/* 「リンクをボタンっぽく」したい場合にも効く */
+a.button{ display:inline-block; }
 
 /* ===============================
    Forms (Base)
@@ -121,7 +130,7 @@ label{
   display:block;
   margin-bottom:6px;
   font-weight:800;
-  color:#374151;
+  color:#4b5563;
   font-size:.85rem;
 }
 
@@ -133,12 +142,15 @@ textarea,
 select{
   width:100%;
   padding:10px 12px;
-  border:1px solid #ddd;
-  border-radius:12px;
+  border:1px solid #e5e7eb;
+  border-radius:14px;
   font-size:.95rem;
   background:#fff;
-  transition:border-color .2s ease,box-shadow .2s ease;
+  color:#374151;
+  transition:border-color .2s ease,box-shadow .2s ease, background .2s ease;
 }
+
+input::placeholder, textarea::placeholder{ color:#9ca3af; }
 
 input:focus,
 textarea:focus,
@@ -147,6 +159,7 @@ select:focus{
   border-color:rgba(233,119,0,0.7);
   box-shadow:0 0 0 4px rgba(233,119,0,0.12);
 }
+
 textarea{ resize:vertical; min-height:90px; }
 
 /* ===============================
@@ -172,12 +185,13 @@ textarea{ resize:vertical; min-height:90px; }
 }
 
 /* ==================================================
-   商品一覧 (items.html)
+   商品一覧 (items)
 ================================================== */
 .main-nav{
   display:flex;
   gap:12px;
   margin:14px 0 18px;
+  flex-wrap:wrap;
 }
 
 .filter-form{
@@ -185,12 +199,13 @@ textarea{ resize:vertical; min-height:90px; }
   grid-template-columns:1fr 220px auto;
   gap:12px;
   align-items:end;
-  background:#f9fafb;
+  background:#ffffffcc;
   padding:16px;
   border-radius:16px;
-  border:1px solid #eee;
+  border:1px solid #f1f5f9;
   box-shadow:var(--shadow-soft);
 }
+
 .filter-form label{
   font-size:.8rem;
   color:var(--text-sub);
@@ -234,13 +249,14 @@ textarea{ resize:vertical; min-height:90px; }
   line-height:1.35;
   height:36px;
   overflow:hidden;
+  color:#374151;
 }
 .item-card .price{
   font-size:14px;
   font-weight:900;
   padding:6px 10px 6px;
   margin:0;
-  color:#111;
+  color:#111827;
 }
 .item-card .status{
   font-size:11px;
@@ -281,9 +297,9 @@ textarea{ resize:vertical; min-height:90px; }
   font-weight:900;
 }
 .pagination a{
-  border:1px solid #ddd;
+  border:1px solid #e5e7eb;
   background:#fff;
-  color:#333;
+  color:#374151;
 }
 .pagination a:hover{
   background:#111;
@@ -295,7 +311,7 @@ textarea{ resize:vertical; min-height:90px; }
 }
 
 /* ==================================================
-   商品詳細 (item detail) ※あなたのHTML構造に合わせてCSSだけで2カラム化
+   商品詳細 (item_detail)
 ================================================== */
 .item-detail{
   margin:18px 0 34px;
@@ -310,7 +326,7 @@ textarea{ resize:vertical; min-height:90px; }
   align-items:start;
 }
 
-/* 左：画像（item-detail直下のimgを拾う） */
+/* 左：画像 */
 .item-detail > img{
   grid-column:1;
   grid-row:1 / span 30;
@@ -321,12 +337,11 @@ textarea{ resize:vertical; min-height:90px; }
   background:#f3f4f6;
 }
 
-/* 右：それ以外を全部2列目へ */
+/* 右：それ以外 */
 .item-detail > :not(img){
   grid-column:2;
 }
 
-/* 価格（右側で目立たせる） */
 .item-detail .price{
   margin-top:6px;
   font-size:1.05rem;
@@ -341,14 +356,11 @@ textarea{ resize:vertical; min-height:90px; }
   letter-spacing:.5px;
 }
 
-/* テキストの優しさ */
-.item-detail p{
-  color:#374151;
-}
+.item-detail p{ color:#4b5563; }
 .item-detail p span,
 .item-detail p a{
-  font-weight:700;
-  color:#111827;
+  font-weight:800;
+  color:#374151;
 }
 
 /* ボタン群 */
@@ -361,7 +373,7 @@ textarea{ resize:vertical; min-height:90px; }
   align-items:center;
 }
 
-/* 購入ボタン（EC風：横長） */
+/* 購入ボタン（横長） */
 .button-group form:first-child button.button{
   background:var(--primary);
   padding:14px 18px;
@@ -380,7 +392,7 @@ textarea{ resize:vertical; min-height:90px; }
 }
 
 /* ==================================================
-   Chat（あなたのHTML: chat-box / chat-form）
+   Chat
 ================================================== */
 .chat-box{
   border:1px solid var(--border);
@@ -412,11 +424,11 @@ textarea{ resize:vertical; min-height:90px; }
 .sender-name{
   font-weight:900;
   font-size:.85rem;
-  color:#374151;
+  color:#4b5563;
 }
 .message-time{
   font-size:.75rem;
-  color:#6b7280;
+  color:#9ca3af;
   margin-left:8px;
 }
 .chat-message p{ margin:6px 0 0; }
@@ -439,7 +451,7 @@ textarea{ resize:vertical; min-height:90px; }
 }
 
 /* ==================================================
-   Report box（あなたのHTMLは report-box）
+   Report box (通報フォーム)
 ================================================== */
 .report-box{
   margin-top:22px;
@@ -476,157 +488,115 @@ textarea{ resize:vertical; min-height:90px; }
 }
 
 /* ==================================================
-   Admin: ユーザー管理（優しい印象のテーブル）
-   ※ <body class="admin-page"> のページにのみ効く
+   Admin 共通：ユーザー管理 / 通報一覧
+   HTML想定：<main class="container admin-page">
+             <form class="toolbar"> または <div class="toolbar">
+             <table class="table">
 ================================================== */
-.admin-page h1{
-  max-width:1100px;
-  margin:24px auto 12px;
-  padding:0 16px;
-  color:#374151;           /* 黒→濃いグレー */
-  letter-spacing:.03em;
-}
-
-/* 検索フォーム：カード化 */
-.admin-page form[method="get"]{
-  width:min(1100px, calc(100% - 32px));
-  margin:0 auto 16px;
-  padding:14px 16px;
-  background:#fff;
-  border:1px solid var(--border);
-  border-radius:16px;
-  box-shadow:var(--shadow-soft);
-
+.admin-page .toolbar{
   display:grid;
-  grid-template-columns: 1.2fr 220px 220px auto;
+  grid-template-columns: auto 1fr; /* 左に戻るボタン、右に説明 */
   gap:12px;
   align-items:center;
-}
 
-.admin-page form[method="get"] input[type="text"],
-.admin-page form[method="get"] select{
-  width:100%;
-  border-radius:14px;
-  background:#f9fafb; /* 優しい */
-  border:1px solid #e5e7eb;
-}
-
-.admin-page form[method="get"] button{
-  background:var(--primary);
-  border-radius:14px;
-  padding:12px 16px;
-  font-weight:1000;
-  transform:none;
-}
-.admin-page form[method="get"] button:hover{
-  background:var(--primary-hover);
-}
-
-/* テーブル：優しいカードテーブル */
-.admin-page table{
-  width:min(1100px, calc(100% - 32px));
-  margin:0 auto 32px;
-  border-collapse:separate !important;
-  border-spacing:0 !important;
+  padding:14px 14px;
+  border-radius:16px;
   background:#fff;
-  border:1px solid #f1f5f9 !important;
+  border:1px solid #f1f5f9;
+  box-shadow:var(--shadow-soft);
+  margin: 10px 0 14px;
+}
+
+.admin-page .hint{
+  margin:0;
+  color:var(--text-sub);
+  font-weight:700;
+  font-size:.9rem;
+}
+
+/* ユーザー管理の「form.toolbar」(検索) 用レイアウト */
+.admin-page form.toolbar{
+  grid-template-columns: 1fr 220px auto;
+}
+
+/* admin テーブル */
+.admin-page .table{
+  width:100%;
+  border-collapse:separate;
+  border-spacing:0;
+  background:#fff;
+  border:1px solid #f1f5f9;
   border-radius:18px;
   overflow:hidden;
   box-shadow:0 8px 24px rgba(0,0,0,0.05);
 }
 
-/* HTMLの border=1 を無効化してデザイン優先 */
-.admin-page table,
-.admin-page table th,
-.admin-page table td{
-  border:none !important;
-}
-
-/* thead */
-.admin-page thead th{
+.admin-page .table thead th{
   background:#f9fafb;
-  color:#6b7280;            /* 優しいグレー */
+  color:#6b7280;
   font-weight:800;
   font-size:.85rem;
   padding:12px 12px;
-  border-bottom:1px solid #e5e7eb !important;
+  border-bottom:1px solid #e5e7eb;
   white-space:nowrap;
 }
 
-/* tbody */
-.admin-page tbody td{
+.admin-page .table tbody td{
   padding:12px 12px;
-  font-size:.9rem;
-  color:#374151;            /* 黒→ダークグレー */
-  border-bottom:1px solid #f1f5f9 !important;
+  color:#374151;
+  font-size:.92rem;
+  border-bottom:1px solid #f1f5f9;
   vertical-align:middle;
 }
 
-/* 行ホバー：薄オレンジ */
-.admin-page tbody tr:hover{
-  background:#fff7ed;
-}
+.admin-page .table tbody tr:hover{ background:#fff7ed; }
+.admin-page .table tbody tr:last-child td{ border-bottom:none; }
 
-/* 操作列を整える */
-.admin-page tbody td:last-child{
-  min-width:260px;
-}
-.admin-page tbody td:last-child form{
-  display:flex !important;
-  gap:10px;
-  align-items:center;
-  flex-wrap:wrap;
-}
-
-/* 理由入力 */
-.admin-page tbody td:last-child input[type="text"]{
-  width:160px;
-  padding:10px 12px;
-  border-radius:14px;
-  background:#f9fafb;
+/* “詳細”リンクをボタンっぽく */
+.admin-page .table td:last-child a{
+  display:inline-block;
+  padding:8px 12px;
+  border-radius:999px;
   border:1px solid #e5e7eb;
-}
-
-/* BAN：柔らかい赤 */
-.admin-page tbody td:last-child form[action*="/ban"] button{
-  background:#fee2e2;
-  color:#991b1b;
-  border-radius:999px;
-  padding:10px 14px;
-  transform:none;
-}
-.admin-page tbody td:last-child form[action*="/ban"] button:hover{
-  background:#fecaca;
-}
-
-/* BAN解除：柔らかい青 */
-.admin-page tbody td:last-child form[action*="/unban"] button{
-  background:#e0f2fe;
-  color:#0369a1;
-  border-radius:999px;
-  padding:10px 14px;
-  transform:none;
-}
-.admin-page tbody td:last-child form[action*="/unban"] button:hover{
-  background:#bae6fd;
-}
-
-/* ban理由/日時：薄め文字＋省略 */
-.admin-page tbody td:nth-child(7),
-.admin-page tbody td:nth-child(8){
-  color:#6b7280;
+  background:#fff;
+  font-weight:900;
   font-size:.85rem;
-  max-width:240px;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
+  color:#374151;
+  transition:background .15s ease, border-color .15s ease, transform .1s ease;
+}
+.admin-page .table td:last-child a:hover{
+  background:var(--primary-light);
+  border-color:rgba(233,119,0,0.35);
+  transform:translateY(-1px);
 }
 
-/* スマホ：フォーム縦、テーブル横スクロール */
-@media (max-width:900px){
-  .filter-form{ grid-template-columns:1fr; }
-  .main-nav{ flex-wrap:wrap; }
+/* 有効/BAN の“優しいタグ” */
+.tag{
+  display:inline-block;
+  padding:4px 10px;
+  border-radius:999px;
+  font-size:.78rem;
+  font-weight:800;
+  letter-spacing:.02em;
+}
+.tag-ok{ background:#ecfdf5; color:#047857; }
+.tag-ng{ background:#fff7ed; color:#b45309; }
 
+/* 通報一覧：状態列のボタンも整える */
+.admin-page .table form button{
+  background: var(--primary);
+  border-radius: 999px;
+  padding: 9px 14px;
+  font-weight: 900;
+  transform:none;
+}
+.admin-page .table form button:hover{
+  background: var(--primary-hover);
+}
+
+/* Responsive */
+@media (max-width: 900px){
+  .filter-form{ grid-template-columns:1fr; }
   .item-detail{
     grid-template-columns:1fr;
     row-gap:14px;
@@ -649,178 +619,17 @@ textarea{ resize:vertical; min-height:90px; }
   }
   .chat-form button{ width:100%; }
 
-  .admin-page form[method="get"]{
+  .admin-page .toolbar{
     grid-template-columns:1fr;
   }
-  .admin-page table{
+
+  .admin-page .table{
     display:block;
     overflow-x:auto;
     -webkit-overflow-scrolling:touch;
   }
-  .admin-page thead th,
-  .admin-page tbody td{
+  .admin-page .table thead th,
+  .admin-page .table tbody td{
     white-space:nowrap;
   }
 }
-
-/* ==================================================
-   Admin Users Page (users list)
-   HTML: main.container / form.toolbar / table.table
-   影響範囲：main.container 内の .toolbar と .table のみ
-================================================== */
-
-/* タイトル（優しい濃グレー） */
-main.container > h1 {
-  color: #374151;
-  letter-spacing: .02em;
-  margin: 22px 0 14px;
-}
-
-/* ===== 絞り込みツールバー ===== */
-main.container .toolbar {
-  display: grid;
-  grid-template-columns: 1fr 220px auto;
-  gap: 12px;
-  align-items: center;
-
-  padding: 14px 14px;
-  border-radius: 16px;
-  background: #ffffff;
-  border: 1px solid #f1f5f9;
-  box-shadow: var(--shadow-soft);
-  margin-bottom: 14px;
-}
-
-/* toolbar の input/select を “優しい” 見た目に */
-main.container .toolbar input[type="text"],
-main.container .toolbar select {
-  background: #f9fafb;
-  border: 1px solid #e5e7eb;
-  border-radius: 14px;
-  padding: 10px 12px;
-  font-weight: 600;
-  color: #374151;
-}
-
-main.container .toolbar input[type="text"]::placeholder {
-  color: #9ca3af;
-  font-weight: 600;
-}
-
-/* 絞り込みボタン：メイン色（オレンジ） */
-main.container .toolbar button {
-  background: var(--primary);
-  border-radius: 14px;
-  padding: 12px 16px;
-  font-weight: 900;
-  transform: none;
-}
-
-main.container .toolbar button:hover {
-  background: var(--primary-hover);
-  transform: none;
-}
-
-/* ===== テーブル（優しいカード風） ===== */
-main.container .table {
-  width: 100%;
-  border-collapse: separate;
-  border-spacing: 0;
-
-  background: #ffffff;
-  border: 1px solid #f1f5f9;
-  border-radius: 18px;
-  overflow: hidden;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.05);
-}
-
-/* 見出し（淡いグレー） */
-main.container .table thead th {
-  background: #f9fafb;
-  color: #6b7280;
-  font-weight: 800;
-  font-size: 0.85rem;
-  padding: 12px 12px;
-  border-bottom: 1px solid #e5e7eb;
-  white-space: nowrap;
-}
-
-/* 本文（黒→濃いグレー） */
-main.container .table tbody td {
-  padding: 12px 12px;
-  color: #374151;
-  font-size: 0.92rem;
-  border-bottom: 1px solid #f1f5f9;
-  vertical-align: middle;
-}
-
-/* 行ホバー（主張しない薄オレンジ） */
-main.container .table tbody tr:hover {
-  background: #fff7ed;
-}
-
-/* 最後の行の下線だけ消す */
-main.container .table tbody tr:last-child td {
-  border-bottom: none;
-}
-
-/* メール列が長いときに潰れないように */
-main.container .table td:nth-child(3) {
-  max-width: 360px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-/* ロールを少しバッジっぽく（CSSだけで柔らかく） */
-main.container .table td:nth-child(4) {
-  font-weight: 800;
-  color: #374151;
-}
-
-/* enabled / banned を “優しい” 表示（文字色だけ） */
-main.container .table td:nth-child(5),
-main.container .table td:nth-child(6) {
-  font-weight: 900;
-  font-variant-numeric: tabular-nums;
-  color: #6b7280; /* まずは優しいグレー */
-}
-
-/* 詳細リンクをボタンっぽく */
-main.container .table td:last-child a {
-  display: inline-block;
-  padding: 8px 12px;
-  border-radius: 999px;
-  border: 1px solid #e5e7eb;
-  background: #fff;
-  font-weight: 900;
-  font-size: 0.85rem;
-  color: #374151;
-  transition: background .15s ease, border-color .15s ease, transform .1s ease;
-}
-
-main.container .table td:last-child a:hover {
-  background: var(--primary-light);
-  border-color: rgba(233,119,0,0.35);
-  transform: translateY(-1px);
-}
-
-/* ===== スマホ対応 ===== */
-@media (max-width: 900px) {
-  main.container .toolbar {
-    grid-template-columns: 1fr;
-  }
-
-  /* テーブルは横スクロール可能に */
-  main.container .table {
-    display: block;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  main.container .table thead th,
-  main.container .table tbody td {
-    white-space: nowrap;
-  }
-}
-
