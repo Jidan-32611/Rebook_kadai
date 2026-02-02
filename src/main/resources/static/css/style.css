@@ -568,3 +568,197 @@ textarea { resize: vertical; min-height: 90px; }
     width: 100%;
   }
 }
+
+
+/* ==================================================
+   Admin: ユーザー管理（/admin/users） 見栄え改善
+   ※ HTML変更なしでも効く（ただし container追加でさらに良い）
+================================================== */
+
+/* ページ全体の余白を整える（admin画面だけ） */
+body > h1 {
+  max-width: 1100px;
+  margin: 24px auto 12px;
+  padding: 0 16px;
+}
+
+/* admin の検索フォーム（body直下 form を想定） */
+body > form[method="get"] {
+  max-width: 1100px;
+  margin: 0 auto 16px;
+  padding: 14px 16px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: var(--shadow-soft);
+
+  display: grid;
+  grid-template-columns: 1.2fr 220px 220px auto;
+  gap: 12px;
+  align-items: center;
+}
+
+/* placeholderの見た目 */
+body > form[method="get"] input::placeholder {
+  color: #9ca3af;
+  font-weight: 600;
+}
+
+/* adminフォームの input / select を横幅いっぱいに */
+body > form[method="get"] input[type="text"],
+body > form[method="get"] select {
+  width: 100%;
+  border-radius: 12px;
+}
+
+/* adminの絞り込みボタンを “メイン色” に */
+body > form[method="get"] button {
+  background: var(--primary);
+  font-weight: 1000;
+  border-radius: 12px;
+  padding: 12px 16px;
+  transform: none;
+}
+
+body > form[method="get"] button:hover {
+  background: var(--primary-hover);
+}
+
+/* ===== テーブル全体をカード化 ===== */
+body > table {
+  width: min(1100px, calc(100% - 32px));
+  margin: 0 auto 32px;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+}
+
+/* thead */
+body > table thead th {
+  background: #f9fafb;
+  color: #111827;
+  font-size: 0.85rem;
+  letter-spacing: .2px;
+  font-weight: 1000;
+  padding: 12px 12px;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+/* tbody */
+body > table tbody td {
+  padding: 12px 12px;
+  font-size: 0.9rem;
+  border-bottom: 1px solid #f1f5f9;
+  vertical-align: middle;
+}
+
+/* 行ホバー */
+body > table tbody tr:hover {
+  background: #fff7ed; /* 薄オレンジ */
+}
+
+/* border属性の見た目を無効化（HTMLに border=1 があっても見た目優先） */
+body > table,
+body > table th,
+body > table td {
+  border-color: transparent !important;
+}
+
+/* ===== true/false の見た目をタグ化 ===== */
+body > table tbody td:nth-child(5),
+body > table tbody td:nth-child(6) {
+  font-weight: 900;
+}
+
+/* enabled true/false */
+body > table tbody td:nth-child(5)::before {
+  content: "";
+}
+body > table tbody td:nth-child(5)[data-true],
+body > table tbody td:nth-child(5)[data-false] {}
+
+/* banned true/false の強調 */
+body > table tbody td:nth-child(6) {
+  color: #111827;
+}
+
+/* 文字列が "true" / "false" の場合に見え方を寄せる（CSSのみの簡易） */
+body > table tbody td:nth-child(5),
+body > table tbody td:nth-child(6) {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ===== 操作欄（BANフォーム）を整列 ===== */
+body > table tbody td:last-child {
+  min-width: 240px;
+}
+
+/* BAN/解除フォームのレイアウト */
+body > table tbody td:last-child form {
+  display: flex !important;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* 理由入力 */
+body > table tbody td:last-child input[type="text"] {
+  width: 160px;
+  padding: 10px 12px;
+  border-radius: 12px;
+}
+
+/* BANボタン（危険色に寄せる） */
+body > table tbody td:last-child form[action*="/ban"] button {
+  background: #dc2626;  /* danger */
+  border-radius: 12px;
+  padding: 10px 14px;
+  transform: none;
+}
+
+body > table tbody td:last-child form[action*="/ban"] button:hover {
+  background: #b91c1c;
+}
+
+/* BAN解除ボタン（secondary風） */
+body > table tbody td:last-child form[action*="/unban"] button {
+  background: #111;
+  border-radius: 12px;
+  padding: 10px 14px;
+  transform: none;
+}
+
+/* ban理由/ban日時が長い時の折返し */
+body > table tbody td:nth-child(7),
+body > table tbody td:nth-child(8) {
+  color: var(--text-sub);
+  font-size: 0.85rem;
+  max-width: 240px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ===== スマホ対応 ===== */
+@media (max-width: 900px) {
+  body > form[method="get"] {
+    grid-template-columns: 1fr;
+  }
+
+  body > table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  body > table thead th,
+  body > table tbody td {
+    white-space: nowrap;
+  }
+}
+
