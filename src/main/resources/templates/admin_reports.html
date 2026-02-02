@@ -51,23 +51,37 @@
 
         <td>
 			<form th:if="${report.status == '未対応'}"
-			            th:action="@{/admin/reports/{id}/resolve(id=${report.id})}"
-			            method="post">
-			        <button type="submit">対応済にする</button>
+			      th:action="@{/admin/reports/{id}/resolve(id=${report.id})}"
+			      method="post">
+			  <input type="hidden"
+			         th:name="${_csrf.parameterName}"
+			         th:value="${_csrf.token}">
+					 <button type="submit"
+					         onclick="return confirm('この通報を対応済にしますか？');">
+					   対応済にする
+					 </button>
+
+			</form>
+
 			      </form>
 
-			      <span th:if="${report.status == '対応済'}"> 対応済</span>
+				  <span class="tag tag-ok" th:if="${report.status == '対応済'}">
+				    対応済
+				  </span>
+
         </td>
 
         <td>
-            <a th:href="@{/admin/users/{id}(id=${report.item.seller.id})}"
-               class="btn btn-detail">
-                詳細
-            </a>
+			<a th:href="@{/admin/users/{id}(id=${report.item.seller.id})}"
+			   class="button secondary">
+			  詳細
+			</a>
+
         </td>
     </tr>
     </tbody>
 </table>
+</main>
 
 </body>
 </html>

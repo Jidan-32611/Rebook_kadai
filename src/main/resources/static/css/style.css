@@ -594,6 +594,17 @@ textarea{ resize:vertical; min-height:90px; }
   background: var(--primary-hover);
 }
 
+.admin-page .admin-link {
+  font-weight: 800;
+  color: #374151;
+  text-decoration: underline;
+}
+
+.admin-page .admin-link:hover {
+  color: var(--primary);
+}
+
+
 /* Responsive */
 @media (max-width: 900px){
   .filter-form{ grid-template-columns:1fr; }
