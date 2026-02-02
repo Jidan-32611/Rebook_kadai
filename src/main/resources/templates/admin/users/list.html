@@ -6,7 +6,7 @@
 	  <!-- 以降そのページ固有の内容 -->
 
 <main class="container">
-  <h1>ユーザー管理</h1>
+  <h1>ユーザー管理　ヘッダー</h1>
 
   <form method="get" class="toolbar">
     <input type="text" name="q" th:value="${q}" placeholder="検索（名前/メール）">
@@ -29,8 +29,9 @@
         <td th:text="${u.name}"></td>
         <td th:text="${u.email}"></td>
         <td th:text="${u.role}"></td>
-        <td th:text="${u.enabled}"></td>
-        <td th:text="${u.banned}"></td>
+		<td th:text="${u.enabled} ? '有効' : '無効'"></td>
+		<td th:text="${u.banned} ? 'BAN中' : '未BAN'"></td>
+
         <td><a th:href="@{|/admin/users/${u.id}|}">詳細</a></td>
       </tr>
     </tbody>
