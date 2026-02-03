@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="ja">
-	<head th:replace="~{fragments/layout :: head('ページタイトル')}"></head>
+	<head th:replace="~{fragments/layout :: head('ユーザーの管理')}"></head>
 	<body>
 	  <header th:insert="~{fragments/layout :: header}"></header>
 	  <!-- 以降そのページ固有の内容 -->
 
 <main class="container">
-  <h1>ユーザー管理　ヘッダー</h1>
+  <h1>ユーザー管理　</h1>
 
   <form method="get" class="toolbar">
     <input type="text" name="q" th:value="${q}" placeholder="検索（名前/メール）">

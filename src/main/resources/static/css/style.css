@@ -1,12 +1,9 @@
-/* ===============================
-   CSS Variables
-================================ */
 :root{
   --primary:#e97700;
   --primary-hover:#d16900;
   --primary-light:#fff4e6;
 
-  --text-main:#374151; /* 黒より優しい濃グレー */
+  --text-main:#374151; 
   --text-sub:#6b7280;
 
   --border:#e5e7eb;
@@ -17,9 +14,6 @@
   --shadow-soft:0 2px 10px rgba(0,0,0,0.06);
 }
 
-/* ===============================
-   Base
-================================ */
 *{ box-sizing:border-box; }
 
 body{
@@ -38,9 +32,7 @@ a{ color:inherit; text-decoration:none; }
   padding:0 16px;
 }
 
-/* ===============================
-   Header / Navbar (fragment)
-================================ */
+
 .navbar{
   display:flex;
   align-items:center;
@@ -65,9 +57,7 @@ a{ color:inherit; text-decoration:none; }
 .nav-links a:hover{ text-decoration:underline; }
 .logout-form{ margin:0; }
 
-/* ===============================
-   Headings / Text
-================================ */
+
 h1{
   font-size:1.4rem;
   font-weight:900;
@@ -82,9 +72,7 @@ h2{
 }
 p{ margin:0 0 12px; line-height:1.7; color:var(--text-main); }
 
-/* ===============================
-   Buttons
-================================ */
+
 .button,
 button{
   border:none;
@@ -120,12 +108,9 @@ button:hover{
   background:var(--primary-hover);
 }
 
-/* 「リンクをボタンっぽく」したい場合にも効く */
 a.button{ display:inline-block; }
 
-/* ===============================
-   Forms (Base)
-================================ */
+
 label{
   display:block;
   margin-bottom:6px;
@@ -162,9 +147,7 @@ select:focus{
 
 textarea{ resize:vertical; min-height:90px; }
 
-/* ===============================
-   Messages
-================================ */
+
 .error-message{
   margin:14px 0;
   padding:12px 14px;
@@ -184,9 +167,7 @@ textarea{ resize:vertical; min-height:90px; }
   border:1px solid #bbf7d0;
 }
 
-/* ==================================================
-   商品一覧 (items)
-================================================== */
+
 .main-nav{
   display:flex;
   gap:12px;
@@ -265,7 +246,7 @@ textarea{ resize:vertical; min-height:90px; }
   margin:0;
 }
 
-/* 売却済：右下バッジ（sold クラス時） */
+
 .item-card.sold img{ filter:brightness(70%); }
 .item-card.sold::after{
   content:"売却済";
@@ -281,7 +262,7 @@ textarea{ resize:vertical; min-height:90px; }
   letter-spacing:1px;
 }
 
-/* Pagination */
+
 .pagination{
   margin:32px 0 16px;
   text-align:center;
@@ -310,9 +291,6 @@ textarea{ resize:vertical; min-height:90px; }
   color:#fff;
 }
 
-/* ==================================================
-   商品詳細 (item_detail)
-================================================== */
 .item-detail{
   margin:18px 0 34px;
   padding:18px;
@@ -326,7 +304,6 @@ textarea{ resize:vertical; min-height:90px; }
   align-items:start;
 }
 
-/* 左：画像 */
 .item-detail > img{
   grid-column:1;
   grid-row:1 / span 30;
@@ -337,7 +314,7 @@ textarea{ resize:vertical; min-height:90px; }
   background:#f3f4f6;
 }
 
-/* 右：それ以外 */
+
 .item-detail > :not(img){
   grid-column:2;
 }
@@ -363,7 +340,7 @@ textarea{ resize:vertical; min-height:90px; }
   color:#374151;
 }
 
-/* ボタン群 */
+
 .button-group{
   grid-column:2;
   margin-top:14px;
@@ -373,7 +350,7 @@ textarea{ resize:vertical; min-height:90px; }
   align-items:center;
 }
 
-/* 購入ボタン（横長） */
+
 .button-group form:first-child button.button{
   background:var(--primary);
   padding:14px 18px;
@@ -391,9 +368,7 @@ textarea{ resize:vertical; min-height:90px; }
   transform:none;
 }
 
-/* ==================================================
-   Chat
-================================================== */
+
 .chat-box{
   border:1px solid var(--border);
   border-radius:18px;
@@ -450,9 +425,7 @@ textarea{ resize:vertical; min-height:90px; }
   background:#111;
 }
 
-/* ==================================================
-   Report box (通報フォーム)
-================================================== */
+
 .report-box{
   margin-top:22px;
   background:#fff;
@@ -471,9 +444,7 @@ textarea{ resize:vertical; min-height:90px; }
   margin-top:8px;
 }
 
-/* ==================================================
-   Profile
-================================================== */
+
 .profile-box{
   background:var(--card);
   padding:18px;
@@ -487,15 +458,10 @@ textarea{ resize:vertical; min-height:90px; }
   margin:0;
 }
 
-/* ==================================================
-   Admin 共通：ユーザー管理 / 通報一覧
-   HTML想定：<main class="container admin-page">
-             <form class="toolbar"> または <div class="toolbar">
-             <table class="table">
-================================================== */
+
 .admin-page .toolbar{
   display:grid;
-  grid-template-columns: auto 1fr; /* 左に戻るボタン、右に説明 */
+  grid-template-columns: auto 1fr; 
   gap:12px;
   align-items:center;
 
@@ -514,12 +480,10 @@ textarea{ resize:vertical; min-height:90px; }
   font-size:.9rem;
 }
 
-/* ユーザー管理の「form.toolbar」(検索) 用レイアウト */
 .admin-page form.toolbar{
   grid-template-columns: 1fr 220px auto;
 }
 
-/* admin テーブル */
 .admin-page .table{
   width:100%;
   border-collapse:separate;
@@ -552,7 +516,6 @@ textarea{ resize:vertical; min-height:90px; }
 .admin-page .table tbody tr:hover{ background:#fff7ed; }
 .admin-page .table tbody tr:last-child td{ border-bottom:none; }
 
-/* “詳細”リンクをボタンっぽく */
 .admin-page .table td:last-child a{
   display:inline-block;
   padding:8px 12px;
@@ -570,7 +533,7 @@ textarea{ resize:vertical; min-height:90px; }
   transform:translateY(-1px);
 }
 
-/* 有効/BAN の“優しいタグ” */
+
 .tag{
   display:inline-block;
   padding:4px 10px;
@@ -582,7 +545,6 @@ textarea{ resize:vertical; min-height:90px; }
 .tag-ok{ background:#ecfdf5; color:#047857; }
 .tag-ng{ background:#fff7ed; color:#b45309; }
 
-/* 通報一覧：状態列のボタンも整える */
 .admin-page .table form button{
   background: var(--primary);
   border-radius: 999px;
@@ -603,6 +565,113 @@ textarea{ resize:vertical; min-height:90px; }
 .admin-page .admin-link:hover {
   color: var(--primary);
 }
+
+
+.admin-page table.table,
+table.table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+  margin-top: 16px;
+}
+
+.admin-page table.table thead th,
+table.table thead th {
+  background: #f9fafb;
+  color: #6b7280;            
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 12px 14px;
+  border-bottom: 1px solid #e5e7eb;
+  text-align: left;
+  white-space: nowrap;
+}
+
+
+.admin-page table.table tbody td,
+table.table tbody td {
+  padding: 12px 14px;
+  font-size: 0.9rem;
+  color: #374151; 
+  border-bottom: 1px solid #f1f5f9;
+  vertical-align: middle;
+}
+
+.admin-page table.table tbody tr:last-child td,
+table.table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.admin-page table.table tbody tr:hover,
+table.table tbody tr:hover {
+  background: #fff7ed;         
+}
+
+.admin-page table.table tbody td:nth-child(5),
+.admin-page table.table tbody td:nth-child(6),
+table.table tbody td:nth-child(5),
+table.table tbody td:nth-child(6) {
+  font-weight: 700;
+  font-size: 0.8rem;
+}
+
+.admin-page table.table tbody td:nth-child(5),
+table.table tbody td:nth-child(5) {
+  color: #047857;
+}
+
+.admin-page table.table tbody td:nth-child(6),
+table.table tbody td:nth-child(6) {
+  color: #0369a1;
+}
+
+.admin-page table.table tbody td a,
+table.table tbody td a {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #374151;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.admin-page table.table tbody td a:hover,
+table.table tbody td a:hover {
+  background: #f3f4f6;
+  transform: translateY(-1px);
+}
+
+.admin-page table.table tbody td:nth-child(3),
+table.table tbody td:nth-child(3) {
+  color: #6b7280;
+  font-size: 0.85rem;
+}
+
+
+@media (max-width: 900px) {
+  .admin-page table.table,
+  table.table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .admin-page table.table th,
+  .admin-page table.table td,
+  table.table th,
+  table.table td {
+    white-space: nowrap;
+  }
+}
+
 
 
 /* Responsive */
