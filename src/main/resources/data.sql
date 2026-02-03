@@ -14,24 +14,6 @@ INSERT INTO item (user_id, name, description, price, category_id, status, image_
 VALUES
 (
   (SELECT id FROM users WHERE email='sellerA@example.com'),
-  'Javaプログラミング入門',
-  '初心者向けのJava入門書です。',
-  1500.00,
-  (SELECT id FROM category WHERE name='実用書'),
-  '出品中',
-  '/images/items/java_book.jpg'
-),
-(
-  (SELECT id FROM users WHERE email='sellerA@example.com'),
-  'キングダム一巻',
-  '熱い漫画',
-  500.00,
-  (SELECT id FROM category WHERE name='漫画コミック'),
-  '売却済',
-  '/images/items/king.jpg'
-),
-(
-  (SELECT id FROM users WHERE email='sellerA@example.com'),
   'Python料理大全',
   'レシピ形式で学べる実践Python。',
   1800.00,
