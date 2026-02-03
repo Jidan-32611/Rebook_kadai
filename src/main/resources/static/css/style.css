@@ -655,6 +655,23 @@ table.table tbody td:nth-child(3) {
   font-size: 0.85rem;
 }
 
+.seller { margin-top: 8px; }
+.seller-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  font-weight: 600;
+}
+.seller-link:hover { text-decoration: underline; }
+
+.seller-hint {
+  font-weight: 400;
+  opacity: 0.75;
+  font-size: 0.9em;
+}
+
+
 
 @media (max-width: 900px) {
   .admin-page table.table,
