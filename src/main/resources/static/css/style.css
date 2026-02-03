@@ -92,12 +92,12 @@ button:hover{
 }
 
 .button.secondary{
-  background:#fff;
+  background:#4b5563;
   color:#374151;
   border:1px solid var(--border);
 }
 .button.secondary:hover{
-  background:#f9fafb;
+  background:#4b5563;
   transform:translateY(-1px);
 }
 
