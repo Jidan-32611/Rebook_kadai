@@ -13,7 +13,7 @@
         <div th:if="${successMessage}" class="success-message" th:text="${successMessage}"></div>
 
         <div class="item-detail">
-			<img th:src="@{${item.imageUrl != null ? item.imageUrl : '/images/placeholder.png'}}"alt="商品画像">
+			<img th:src="${item.imageUrl != null ? item.imageUrl : '/images/placeholder.png'}" alt="商品画像">
             <p class="price">価格: <span th:text="'¥' + ${#numbers.formatDecimal(item.price, 0, 'COMMA', 0, 'POINT')}"></span></p>
             <p>説明: <span th:text="${item.description}"></span></p>
             <p>カテゴリ: <span th:text="${item.category != null ? item.category.name : '未分類'}"></span></p>
