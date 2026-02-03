@@ -29,7 +29,7 @@ VALUES
   (SELECT id FROM category WHERE name='漫画コミック'),
   '売却済',
   '/images/items/king.jpg'
-);
+),
 (
   (SELECT id FROM users WHERE email='sellerA@example.com'),
   'Python料理大全',
