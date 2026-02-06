@@ -33,8 +33,8 @@
         <div class="item-grid">
             <div class="item-card" th:classappend="${item.status == '売却済'} ? ' sold'" th:each="item : ${items.content}">
                 <a th:href="@{/items/{id}(id=${item.id})}">
-					<img th:src="@{${item.imageUrl != null ? item.imageUrl : '/images/placeholder.png'}}" alt="商品画像">
-					  <h3 th:text="${item.name}"></h3>
+					<img th:src="${item.imageUrl} ?: @{/images/placeholder.png}" alt="商品画像">	
+				  <h3 th:text="${item.name}"></h3>
                     <p class="price" th:text="'¥' + ${#numbers.formatDecimal(item.price, 0, 'COMMA', 0, 'POINT')}"></p>
                     <p class="status" th:text="${item.status}"></p>
                 </a>

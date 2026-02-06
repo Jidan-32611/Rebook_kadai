@@ -108,8 +108,8 @@ CREATE TABLE report (
   reporter_id int NOT NULL REFERENCES users(id),
   reason varchar(50) NOT NULL,
   message text,
-  status varchar(20) DEFAULT '未対応',
-  created_at timestamp DEFAULT CURRENT_TIMESTAMP
+  status VARCHAR(20) NOT NULL DEFAULT '未対応',
+   created_at timestamp DEFAULT CURRENT_TIMESTAMP
 );
 
 

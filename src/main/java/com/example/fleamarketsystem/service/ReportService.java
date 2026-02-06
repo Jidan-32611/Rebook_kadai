@@ -29,6 +29,7 @@ public class ReportService {
 		report.setReporter(reporter);
 		report.setReason(reason);
 		report.setMessage(message);
+		report.setStatus("未対応");
 
 		reportRepository.save(report);
 	}

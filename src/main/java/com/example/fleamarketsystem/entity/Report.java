@@ -35,6 +35,6 @@ public class Report {
 	private LocalDateTime createdAt = LocalDateTime.now();
 
 	@Column(nullable = false)
-	private String status; // 未対応 / 対応済
+	private String status = "未対応";
 
 }
